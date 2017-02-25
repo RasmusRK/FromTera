@@ -20,6 +20,11 @@ public class PlayerController : MonoBehaviour {
 	public KeyCode thrustFrontRighKey;
 	public KeyCode thrustFrontMainKey;
 
+	public GameObject shot;
+	public Transform shotSpawn;
+	private float nextFire = 0.5F;
+	public float fireDelta = 0.5F;
+	private float myTime = 0.0F;
 
 	// Use this for initialization
 	void Start () {
@@ -36,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 		//var main = thrust1.GetComponentsInChildren<ParticleSystem>()[0].main;
 		//main.startRotation = thrust1.transform.rotation;
 
+		// Movement
 		if(Input.GetKey(thrustBackLeftKey))
 		{
 			rb.AddForceAtPosition (transform.forward* mainSpeed ,thrust1.transform.position);
@@ -60,7 +66,19 @@ public class PlayerController : MonoBehaviour {
 		{
 			rb.AddForceAtPosition (transform.forward * -frontSpeed, thrust5.transform.position);
 			thrust5.transform.Find("Thruster_temp").gameObject.SetActive(true);
+		}
 
+		// Fire
+		myTime = myTime + Time.deltaTime;
+
+		if (Input.GetButton("Fire1") && myTime > nextFire) {
+			nextFire = myTime + fireDelta;
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+
+			// create code here that animates the newProjectile        
+
+			nextFire = nextFire - myTime;
+			myTime = 0.0F;
 		}
 
 		//transform.Rotate(0, rotation, 0);
