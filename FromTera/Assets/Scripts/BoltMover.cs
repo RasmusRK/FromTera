@@ -10,6 +10,7 @@ public class BoltMover : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
+		print (player.transform.forward);
 		rb.velocity = player.transform.forward * speed;
 	}
 	
