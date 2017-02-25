@@ -6,38 +6,63 @@ using UnityEngine;
 public class SunScript : MonoBehaviour {
 
 	private float distr;
-	private double G = 6.6733e-10;
-	private double vel;
+	private double G = 6.6733e-9;
+	private float  vel;
+	private float vel1;
 	private Rigidbody2D rb;
-	private double sunmass;
-	private double Gmm;
+	private float sunmass;
+	private float Gmm;
 	private float mass;
-	private double dt = 1e5;
-	private double vx;
-	private double vy;
+	private float dt = (float)1e5;
+	//private double vx;
+	//private double vy;
+	private float m;
+	private float x;
+	private float y;
+	int count = 0;
+	private List<float> vx = new List<float>();
+	private List <float>vy= new List<float>();
+	int afflen;
+
+	public GameObject[] affected;
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
-		foreach(Transform child in transform)
+
+		affected = GameObject.FindGameObjectsWithTag ("Asteroid");
+		afflen = affected.Length;
+		foreach(GameObject aff in affected)
 		{
-			child.GetComponent<Rigidbody2D>().AddForce(new Vector2(-150.0f,30.0f));
+			aff.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200.0f,0));
+			vx.Add(0.0f);
+			vy.Add(0.0f);
 		}
+
+
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		distr = Mathf.Sqrt(Mathf.Pow (this.transform.position.x - this.transform.GetChild (0).position.x, 2)+Mathf.Pow(this.transform.position.x - this.transform.GetChild(0).position.y,2));
-		Gmm = G * rb.mass * transform.GetChild(0).GetComponent<Rigidbody2D>().mass;
+	void FixedUpdate () {
+		count = 0;
+		foreach (GameObject aff in affected) 
+		{
+			m = aff.GetComponent<Rigidbody2D> ().mass;
+			x = aff.transform.position.x;
+			y = aff.transform.position.y;
+			distr = Mathf.Sqrt(Mathf.Pow (this.transform.position.x - x, 2)+Mathf.Pow(this.transform.position.y - y,2));
+			Gmm = (float)G * rb.mass * m;
 
-		vel = (Gmm * ((this.transform.position.x - this.transform.GetChild (0).position.x)/distr)/rb.mass * dt);
-		vx += vel;
+			vel = (Gmm * ((this.transform.position.x-x)/distr)/rb.mass * dt);
+			vel1 = (Gmm * ((this.transform.position.y-y)/distr)/rb.mass * dt);
 
-		vel = (Gmm * ((this.transform.position.y - this.transform.GetChild (0).position.y)/distr)/rb.mass * dt);
-		vy += vel;
+			vx[count%afflen] += vel;
+			vy[count%afflen] += vel1;
+			
+			aff.transform.position += new Vector3 (vx[count%afflen] ,vy[count%afflen],0);
+			count++;
 
-		
-		transform.GetChild (0).position += new Vector3 ((float) vx,(float) vy,0);
+		}
 
 	}
 }
