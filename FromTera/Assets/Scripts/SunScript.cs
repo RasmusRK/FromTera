@@ -58,7 +58,7 @@ public class SunScript : MonoBehaviour {
 
 			vx[count%afflen] += vel;
 			vy[count%afflen] += vel1;
-			
+			print (vx [count % afflen]);
 			aff.transform.position += new Vector3 (vx[count%afflen] ,vy[count%afflen],0);
 			count++;
 
