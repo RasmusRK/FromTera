@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButton("Fire1") && myTime > nextFire) {
 			nextFire = myTime + fireDelta;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation,rb.transform);
 
 			// create code here that animates the newProjectile        
 

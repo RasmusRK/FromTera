@@ -6,13 +6,17 @@ public class BoltMover : MonoBehaviour {
 
 	private Rigidbody2D rb;
 	public float speed;
-	public GameObject player;
 	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		rb = GetComponent<Rigidbody2D> ();
-		print (player.transform.forward);
-		rb.velocity = player.transform.forward * speed;
-	}
-	
 
+		rb.AddForce (transform.parent.forward * speed);
+		//rb.velocity = transform.parent.forward* speed;
+	}
+
+	void OnCollisionEnter2D(Collision2D coll)  
+	{
+		Destroy (this.gameObject);
+	}
 }
