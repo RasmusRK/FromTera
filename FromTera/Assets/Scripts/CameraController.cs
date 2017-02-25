@@ -54,7 +54,6 @@ public class CameraController : MonoBehaviour {
 				}
 			}
 		}
-		print (furthest);
 		main_cam.orthographicSize = Mathf.Max(furthest * (float) 0.6,7);
 		transform.position = newpos/players.Length + offset;
 	}
