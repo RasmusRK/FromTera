@@ -59,7 +59,7 @@ public class SunScript : MonoBehaviour {
 			vx[count%afflen] += vel;
 			vy[count%afflen] += vel1;
 			print (vx [count % afflen]);
-			aff.transform.position += new Vector3 (vx[count%afflen] ,vy[count%afflen],0);
+			aff.GetComponent<Rigidbody2D>().AddForce(new Vector3 (vx[count%afflen]*10 ,vy[count%afflen]*10,0));
 			count++;
 
 		}
