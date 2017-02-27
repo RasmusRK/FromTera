@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 public class SunScript : MonoBehaviour {
 
@@ -23,20 +23,22 @@ public class SunScript : MonoBehaviour {
 	private List<float> vx = new List<float>();
 	private List <float>vy= new List<float>();
 	int afflen;
+	public float GravityConstant;
 
-	public GameObject[] affected;
+	private List<GameObject> affected = new List<GameObject>();
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody2D> ();
 
-		affected = GameObject.FindGameObjectsWithTag ("Asteroid");
-		afflen = affected.Length;
-		foreach(GameObject aff in affected)
-		{
-			aff.GetComponent<Rigidbody2D>().AddForce(new Vector2(-400.0f,0));
-			vx.Add(0.0f);
-			vy.Add(0.0f);
-		}
+		affected.AddRange(GameObject.FindGameObjectsWithTag ("Asteroid"));
+		affected.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+		//afflen = affected.Length;
+		//foreach(GameObject aff in affected)
+		//{
+		//	aff.GetComponent<Rigidbody2D>().AddForce(new Vector2(-400.0f,0));
+		//	vx.Add(0.0f);
+		//	vy.Add(0.0f);
+		//}
 
 
 
@@ -63,7 +65,7 @@ public class SunScript : MonoBehaviour {
 			aff.transform.position += new Vector3 (vx[count%afflen] ,vy[count%afflen],0);
 			count++;*/
 			var direction = this.transform.position - aff.transform.position;
-			aff.GetComponent<Rigidbody2D>().AddForce(direction);
+			aff.GetComponent<Rigidbody2D>().AddForce(direction*GravityConstant);
 		}
 
 	}
