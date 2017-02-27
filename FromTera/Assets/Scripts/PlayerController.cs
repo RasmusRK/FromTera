@@ -20,6 +20,12 @@ public class PlayerController : MonoBehaviour {
 	public KeyCode thrustFrontRighKey;
 	public KeyCode thrustFrontMainKey;
 
+	public KeyCode thrustBackLeftKey_cont;
+	public KeyCode thrustBackRightKey_cont;
+	public KeyCode thrustFrontLeftKey_cont;
+	public KeyCode thrustFrontRighKey_cont;
+	public KeyCode thrustFrontMainKey_cont;
+
 	public GameObject shot;
 	public Transform shotSpawn;
 	private float nextFire = 0.5F;
@@ -41,28 +47,29 @@ public class PlayerController : MonoBehaviour {
 		//var main = thrust1.GetComponentsInChildren<ParticleSystem>()[0].main;
 		//main.startRotation = thrust1.transform.rotation;
 
+
 		// Movement
-		if(Input.GetKey(thrustBackLeftKey))
+		if(Input.GetKey(thrustBackLeftKey)  || Input.GetKeyDown(thrustBackLeftKey_cont ))
 		{
 			rb.AddForceAtPosition (transform.forward* mainSpeed ,thrust1.transform.position);
 			thrust1.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
-		if (Input.GetKey (thrustBackRightKey))
+		if (Input.GetKey (thrustBackRightKey)||Input.GetKey(thrustBackRightKey_cont))
 		{
 			rb.AddForceAtPosition (transform.forward* mainSpeed , thrust2.transform.position);
 			thrust2.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
-		if (Input.GetKey (thrustFrontLeftKey))
+		if (Input.GetKey (thrustFrontLeftKey)||Input.GetKey(thrustFrontLeftKey_cont))
 		{
 			rb.AddForceAtPosition (sideThrust * sideSpeed , thrust3.transform.position);
 			thrust3.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
-		if (Input.GetKey (thrustFrontRighKey))
+		if (Input.GetKey (thrustFrontRighKey)||Input.GetKey(thrustFrontRighKey_cont))
 		{
 			rb.AddForceAtPosition (sideThrust * -sideSpeed , thrust4.transform.position);
 			thrust4.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
-		if (Input.GetKey (thrustFrontMainKey))
+		if (Input.GetKey (thrustFrontMainKey)||Input.GetKey(thrustFrontMainKey_cont))
 		{
 			rb.AddForceAtPosition (transform.forward * -frontSpeed, thrust5.transform.position);
 			thrust5.transform.Find("Thruster_temp").gameObject.SetActive(true);
@@ -86,23 +93,23 @@ public class PlayerController : MonoBehaviour {
 	void LateUpdate()
 	{
 		
-		if (Input.GetKeyUp (thrustBackLeftKey))
+		if (Input.GetKeyUp (thrustBackLeftKey) || Input.GetKeyUp (thrustBackLeftKey_cont))
 		{
 			thrust1.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
-		if (Input.GetKeyUp (thrustBackRightKey))
+		if (Input.GetKeyUp (thrustBackRightKey) || Input.GetKeyUp (thrustBackRightKey_cont))
 		{
 			thrust2.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
-		if (Input.GetKeyUp (thrustFrontLeftKey))
+		if (Input.GetKeyUp (thrustFrontLeftKey) || Input.GetKeyUp (thrustFrontLeftKey_cont))
 		{
 			thrust3.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
-		if (Input.GetKeyUp (thrustFrontRighKey))
+		if (Input.GetKeyUp (thrustFrontRighKey) || Input.GetKeyUp (thrustFrontRighKey_cont))
 		{
 			thrust4.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
-		if (Input.GetKeyUp (thrustFrontMainKey))
+		if (Input.GetKeyUp (thrustFrontMainKey) || Input.GetKeyUp (thrustFrontMainKey_cont))
 		{
 			thrust5.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
