@@ -33,7 +33,7 @@ public class SunScript : MonoBehaviour {
 		afflen = affected.Length;
 		foreach(GameObject aff in affected)
 		{
-			aff.GetComponent<Rigidbody2D>().AddForce(new Vector2(-200.0f,0));
+			aff.GetComponent<Rigidbody2D>().AddForce(new Vector2(-400.0f,0));
 			vx.Add(0.0f);
 			vy.Add(0.0f);
 		}
@@ -47,7 +47,7 @@ public class SunScript : MonoBehaviour {
 		count = 0;
 		foreach (GameObject aff in affected) 
 		{
-			m = aff.GetComponent<Rigidbody2D> ().mass;
+			/*m = aff.GetComponent<Rigidbody2D> ().mass;
 			x = aff.transform.position.x;
 			y = aff.transform.position.y;
 			distr = Mathf.Sqrt(Mathf.Pow (this.transform.position.x - x, 2)+Mathf.Pow(this.transform.position.y - y,2));
@@ -59,9 +59,11 @@ public class SunScript : MonoBehaviour {
 			vx[count%afflen] += vel;
 			vy[count%afflen] += vel1;
 			print (vx [count % afflen]);
-			aff.GetComponent<Rigidbody2D>().AddForce(new Vector3 (vx[count%afflen]*10 ,vy[count%afflen]*10,0));
-			count++;
-
+			//aff.GetComponent<Rigidbody2D>().AddForce(new Vector3 (vx[count%afflen]*10 ,vy[count%afflen]*10,0));
+			aff.transform.position += new Vector3 (vx[count%afflen] ,vy[count%afflen],0);
+			count++;*/
+			var direction = this.transform.position - aff.transform.position;
+			aff.GetComponent<Rigidbody2D>().AddForce(direction);
 		}
 
 	}
