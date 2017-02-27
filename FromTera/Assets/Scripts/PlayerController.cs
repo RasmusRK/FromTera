@@ -9,11 +9,11 @@ public class PlayerController : MonoBehaviour {
 	public float rotationSpeed;
 	private Rigidbody2D rb;
 	// smid de her i sit eget objekt, se evt tutorial
-	public GameObject thrust1;
-	public GameObject thrust2;
-	public GameObject thrust3;
-	public GameObject thrust4;
-	public GameObject thrust5;
+	public GameObject thrustBackLeft;
+	public GameObject thrustBackRight;
+	public GameObject thrustFrontLeft;
+	public GameObject thrustFrontRight;
+	public GameObject thrustFrontMain;
 	public KeyCode thrustBackLeftKey;
 	public KeyCode thrustBackRightKey;
 	public KeyCode thrustFrontLeftKey;
@@ -35,11 +35,11 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent <Rigidbody2D>();
-		thrust1.transform.Find("Thruster_temp").gameObject.SetActive(false);
-		thrust2.transform.Find("Thruster_temp").gameObject.SetActive(false);
-		thrust3.transform.Find("Thruster_temp").gameObject.SetActive(false);
-		thrust4.transform.Find("Thruster_temp").gameObject.SetActive(false);
-		thrust5.transform.Find("Thruster_temp").gameObject.SetActive(false);
+		thrustBackLeft.transform.Find("Thruster_temp").gameObject.SetActive(false);
+		thrustBackRight.transform.Find("Thruster_temp").gameObject.SetActive(false);
+		thrustFrontLeft.transform.Find("Thruster_temp").gameObject.SetActive(false);
+		thrustFrontRight.transform.Find("Thruster_temp").gameObject.SetActive(false);
+		thrustFrontMain.transform.Find("Thruster_temp").gameObject.SetActive(false);
 	}
 	
 	void FixedUpdate () {
@@ -51,28 +51,28 @@ public class PlayerController : MonoBehaviour {
 		// Movement
 		if(Input.GetKey(thrustBackLeftKey)  || Input.GetKeyDown(thrustBackLeftKey_cont ))
 		{
-			rb.AddForceAtPosition (transform.forward* mainSpeed ,thrust1.transform.position);
-			thrust1.transform.Find("Thruster_temp").gameObject.SetActive(true);
+			rb.AddForceAtPosition (transform.forward* mainSpeed ,thrustBackLeft.transform.position);
+			thrustBackLeft.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
 		if (Input.GetKey (thrustBackRightKey)||Input.GetKey(thrustBackRightKey_cont))
 		{
-			rb.AddForceAtPosition (transform.forward* mainSpeed , thrust2.transform.position);
-			thrust2.transform.Find("Thruster_temp").gameObject.SetActive(true);
+			rb.AddForceAtPosition (transform.forward* mainSpeed , thrustBackRight.transform.position);
+			thrustBackRight.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
 		if (Input.GetKey (thrustFrontLeftKey)||Input.GetKey(thrustFrontLeftKey_cont))
 		{
-			rb.AddForceAtPosition (sideThrust * sideSpeed , thrust3.transform.position);
-			thrust3.transform.Find("Thruster_temp").gameObject.SetActive(true);
+			rb.AddForceAtPosition (transform.right* sideSpeed , thrustFrontLeft.transform.position);
+			thrustFrontLeft.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
 		if (Input.GetKey (thrustFrontRighKey)||Input.GetKey(thrustFrontRighKey_cont))
 		{
-			rb.AddForceAtPosition (sideThrust * -sideSpeed , thrust4.transform.position);
-			thrust4.transform.Find("Thruster_temp").gameObject.SetActive(true);
+			rb.AddForceAtPosition (transform.right * -sideSpeed , thrustFrontRight.transform.position);
+			thrustFrontRight.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
 		if (Input.GetKey (thrustFrontMainKey)||Input.GetKey(thrustFrontMainKey_cont))
 		{
-			rb.AddForceAtPosition (transform.forward * -frontSpeed, thrust5.transform.position);
-			thrust5.transform.Find("Thruster_temp").gameObject.SetActive(true);
+			rb.AddForceAtPosition (transform.forward * -frontSpeed, thrustFrontMain.transform.position);
+			thrustFrontMain.transform.Find("Thruster_temp").gameObject.SetActive(true);
 		}
 
 		// Fire
@@ -95,23 +95,23 @@ public class PlayerController : MonoBehaviour {
 		
 		if (Input.GetKeyUp (thrustBackLeftKey) || Input.GetKeyUp (thrustBackLeftKey_cont))
 		{
-			thrust1.transform.Find("Thruster_temp").gameObject.SetActive(false);			
+			thrustBackLeft.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
 		if (Input.GetKeyUp (thrustBackRightKey) || Input.GetKeyUp (thrustBackRightKey_cont))
 		{
-			thrust2.transform.Find("Thruster_temp").gameObject.SetActive(false);			
+			thrustBackRight.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
 		if (Input.GetKeyUp (thrustFrontLeftKey) || Input.GetKeyUp (thrustFrontLeftKey_cont))
 		{
-			thrust3.transform.Find("Thruster_temp").gameObject.SetActive(false);			
+			thrustFrontLeft.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
 		if (Input.GetKeyUp (thrustFrontRighKey) || Input.GetKeyUp (thrustFrontRighKey_cont))
 		{
-			thrust4.transform.Find("Thruster_temp").gameObject.SetActive(false);			
+			thrustFrontRight.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
 		if (Input.GetKeyUp (thrustFrontMainKey) || Input.GetKeyUp (thrustFrontMainKey_cont))
 		{
-			thrust5.transform.Find("Thruster_temp").gameObject.SetActive(false);			
+			thrustFrontMain.transform.Find("Thruster_temp").gameObject.SetActive(false);			
 		}
 
 	}
