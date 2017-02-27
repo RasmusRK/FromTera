@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
 public class SunScript : MonoBehaviour {
 
 	//private float distr;
@@ -24,7 +23,7 @@ public class SunScript : MonoBehaviour {
 	//private List <float>vy= new List<float>();
 	//int afflen;
 	public float GravityConstant;
-
+	
 	private List<GameObject> affected = new List<GameObject>();
 	// Use this for initialization
 	void Start () {
@@ -64,8 +63,11 @@ public class SunScript : MonoBehaviour {
 			//aff.GetComponent<Rigidbody2D>().AddForce(new Vector3 (vx[count%afflen]*10 ,vy[count%afflen]*10,0));
 			aff.transform.position += new Vector3 (vx[count%afflen] ,vy[count%afflen],0);
 			count++;*/
-			var direction = this.transform.position - aff.transform.position;
-			aff.GetComponent<Rigidbody2D>().AddForce(direction*GravityConstant);
+			Vector2 direction = this.transform.position - aff.transform.position;
+			float dist = Mathf.Sqrt (Mathf.Pow (this.transform.position.x - aff.transform.position.x, 2) + Mathf.Pow (this.transform.transform.position.y - aff.transform.position.y, 2));
+			aff.GetComponent<Rigidbody2D>().AddForce( direction*1/dist * GravityConstant);
+		
+			Debug.DrawLine (aff.transform.position,direction*1/dist,Color.red);
 		}
 
 	}
