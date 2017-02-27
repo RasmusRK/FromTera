@@ -67,7 +67,6 @@ public class SunScript : MonoBehaviour {
 			float dist = Mathf.Sqrt (Mathf.Pow (this.transform.position.x - aff.transform.position.x, 2) + Mathf.Pow (this.transform.transform.position.y - aff.transform.position.y, 2));
 			aff.GetComponent<Rigidbody2D>().AddForce( direction*1/dist * GravityConstant);
 		
-			Debug.DrawLine (aff.transform.position,direction*1/dist,Color.red);
 		}
 
 	}
