@@ -17,6 +17,9 @@ public class BoltMover : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)  
 	{
-		Destroy (this.gameObject);
+		//if (coll.transform.name == "wall") 
+		//{
+			Destroy (this.gameObject);
+		//}	
 	}
 }
