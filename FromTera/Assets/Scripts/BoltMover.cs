@@ -17,9 +17,17 @@ public class BoltMover : MonoBehaviour {
 
 	void OnCollisionEnter2D(Collision2D coll)  
 	{
-		//if (coll.transform.name == "wall") 
-		//{
+		if (!(this.tag == "Rocket")) 
+		{
 			Destroy (this.gameObject);
-		//}	
+		}	
+
+		if (coll.transform.tag == "Asteroid") 
+		{
+			//coll.transform.GetComponent<Rigidbody2D> ().AddForce (this.transform.position * 100);
+			rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			this.transform.position = coll.transform.position;
+		}
+			
 	}
 }
