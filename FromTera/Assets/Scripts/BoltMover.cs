@@ -9,15 +9,18 @@ public class BoltMover : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
 	{
-		rb = GetComponent<Rigidbody2D> ();
+		//rb = GetComponent<Rigidbody2D> ();
 
-		rb.AddForce (transform.parent.forward * speed);
+		//rb.AddForce (transform.parent.forward * speed);
 		//rb.velocity = transform.parent.forward* speed;
 	}
 
 	void OnCollisionEnter2D(Collision2D coll)  
 	{
-		if (!(this.tag == "Rocket")) 
+		if (coll.gameObject.tag == "Shot")
+			return;
+
+		if (this.tag != "Rocket") 
 		{
 			Destroy (this.gameObject);
 		}	

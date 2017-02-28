@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 	public KeyCode thrustFrontRighKey_cont;
 	public KeyCode thrustFrontMainKey_cont;
 
-	public GameObject shot;
+	public GameObject shotType;
 	public Transform shotSpawn;
 	private float nextFire = 0.5F;
 	public float fireDelta = 0.5F;
@@ -80,8 +80,8 @@ public class PlayerController : MonoBehaviour {
 
 		if (Input.GetButton("Fire1") && myTime > nextFire) {
 			nextFire = myTime + fireDelta;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation,rb.transform);
-
+			GameObject shot = Instantiate(shotType, shotSpawn.position, shotSpawn.rotation,rb.transform);
+			shot.GetComponent<Rigidbody2D> ().AddForce (transform.forward * 50);
 			// create code here that animates the newProjectile        
 
 			nextFire = nextFire - myTime;
