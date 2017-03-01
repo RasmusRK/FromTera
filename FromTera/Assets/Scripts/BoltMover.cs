@@ -20,7 +20,7 @@ public class BoltMover : MonoBehaviour {
 		if (coll.gameObject.tag == "Shot")
 			return;
 
-		if (this.tag != "Rocket") 
+		if (coll.transform.tag == "Wall") 
 		{
 			Destroy (this.gameObject);
 		}	
@@ -28,9 +28,28 @@ public class BoltMover : MonoBehaviour {
 		if (coll.transform.tag == "Asteroid") 
 		{
 			//coll.transform.GetComponent<Rigidbody2D> ().AddForce (this.transform.position * 100);
-			rb.constraints = RigidbodyConstraints2D.FreezeAll;
-			this.transform.position = coll.transform.position;
+			//rb.constraints = RigidbodyConstraints2D.FreezeAll;
+			print ("Asteroid hit");
+			Destroy (this.GetComponent<Rigidbody2D> ());
+			this.transform.parent = coll.transform;
+			StartCoroutine(AccOnHit());
+
+			//this.transform.position = coll.transform.position;
 		}
 			
+	}
+	IEnumerator AccOnHit()
+	{
+		yield return new WaitForSecondsRealtime(1.5f);
+		float timestart= Time.time;
+		float timeend = Time.time;
+		while (timeend - timestart <2.0f) 
+		{
+			yield return new WaitForSecondsRealtime(0.05f);
+			this.transform.parent.GetComponent<Rigidbody2D> ().AddForce ((this.transform.parent.position-this.transform.position)*15);
+			timeend = Time.time;
+		}
+		Destroy (this.gameObject);
+
 	}
 }

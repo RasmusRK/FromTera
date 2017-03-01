@@ -81,7 +81,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButton("Fire1") && myTime > nextFire) {
 			nextFire = myTime + fireDelta;
 			GameObject shot = Instantiate(shotType, shotSpawn.position, shotSpawn.rotation,rb.transform);
-			shot.GetComponent<Rigidbody2D> ().AddForce (transform.forward * 50);
+			shot.GetComponent<Rigidbody2D> ().AddForce (transform.forward * 30);
 			// create code here that animates the newProjectile        
 
 			nextFire = nextFire - myTime;
