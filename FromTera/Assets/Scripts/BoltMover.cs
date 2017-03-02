@@ -36,13 +36,13 @@ public class BoltMover : MonoBehaviour {
 			print ("Asteroid hit");
 			Destroy (this.GetComponent<Rigidbody2D> ());
 			this.transform.parent = coll.transform;
-			StartCoroutine(AccOnHit());
+			//StartCoroutine(AccOnHit());
 
 			//this.transform.position = coll.transform.position;
 		}
 			
 	}
-	IEnumerator AccOnHit()
+	public IEnumerator AccOnHit()
 	{
 		yield return new WaitForSecondsRealtime(1.5f);
 		float timestart= Time.time;

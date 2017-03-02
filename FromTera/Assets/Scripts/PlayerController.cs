@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour {
 	public KeyCode thrustFrontLeftKey;
 	public KeyCode thrustFrontRighKey;
 	public KeyCode thrustFrontMainKey;
+	public KeyCode IgniteRocket;
 
 	public KeyCode thrustBackLeftKey_cont;
 	public KeyCode thrustBackRightKey_cont;
@@ -86,6 +87,13 @@ public class PlayerController : MonoBehaviour {
 
 			nextFire = nextFire - myTime;
 			myTime = 0.0F;
+		}
+		if(Input.GetKey(IgniteRocket))
+		{
+			foreach (GameObject rockets in GameObject.FindGameObjectsWithTag("Rocket"))
+				{
+					StartCoroutine(rockets.GetComponent<BoltMover>().AccOnHit());
+				}
 		}
 
 		//transform.Rotate(0, rotation, 0);
