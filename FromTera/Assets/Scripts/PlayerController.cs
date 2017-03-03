@@ -88,12 +88,18 @@ public class PlayerController : MonoBehaviour {
 			nextFire = nextFire - myTime;
 			myTime = 0.0F;
 		}
-		if(Input.GetKey(IgniteRocket))
+		if (Input.GetButton ("Jump") && myTime > nextFire)		
 		{
+			nextFire = myTime + fireDelta;
 			foreach (GameObject rockets in GameObject.FindGameObjectsWithTag("Rocket"))
 				{
-					StartCoroutine(rockets.GetComponent<BoltMover>().AccOnHit());
+				if (rockets != null) 
+					{
+					StartCoroutine (rockets.GetComponent<BoltMover> ().AccOnHit ());
+					}
 				}
+			nextFire = nextFire - myTime;
+			myTime = 0.0F;
 		}
 
 		//transform.Rotate(0, rotation, 0);

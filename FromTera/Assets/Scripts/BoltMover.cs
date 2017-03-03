@@ -33,7 +33,6 @@ public class BoltMover : MonoBehaviour {
 		{
 			//coll.transform.GetComponent<Rigidbody2D> ().AddForce (this.transform.position * 100);
 			//rb.constraints = RigidbodyConstraints2D.FreezeAll;
-			print ("Asteroid hit");
 			Destroy (this.GetComponent<Rigidbody2D> ());
 			this.transform.parent = coll.transform;
 			//StartCoroutine(AccOnHit());
@@ -44,7 +43,8 @@ public class BoltMover : MonoBehaviour {
 	}
 	public IEnumerator AccOnHit()
 	{
-		yield return new WaitForSecondsRealtime(1.5f);
+		transform.tag = "Dead";
+		//yield return new WaitForSecondsRealtime(1.5f);
 		float timestart= Time.time;
 		float timeend = Time.time;
 		this.transform.Find("exhaust").gameObject.SetActive(true);
